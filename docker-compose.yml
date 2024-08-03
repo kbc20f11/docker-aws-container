@@ -1,12 +1,5 @@
-version: '3.7'
+version: "3.7"
 services:
-  dynamodb:
-      image: amazon/dynamodb-local
-      command: -jar DynamoDBLocal.jar -sharedDb -dbPath . -optimizeDbBeforeStartup
-      volumes:
-          - dynamodb:/home/dynamodblocal
-      ports:
-          - 8000:8000
   aws-cli:
     tty: true
     volumes:
@@ -18,11 +11,6 @@ services:
         - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
         - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
         - AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
-        - SERVERLESS_ACCESS_KEY_ID=$SERVERLESS_ACCESS_KEY_ID
-        - SERVERLESS_SECRET_ACCESS_KEY=$SERVERLESS_SECRET_ACCESS_KEY
-volumes:
-  dynamodb:           
-
-
-    
-
+    environment:
+      SERVERLESS_ACCESS_KEY_ID: ${SERVERLESS_ACCESS_KEY_ID}
+      SERVERLESS_SECRET_ACCESS_KEY: ${SERVERLESS_SECRET_ACCESS_KEY}
